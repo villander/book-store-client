@@ -1,5 +1,13 @@
-{{!-- The following component displays Ember's default welcome message. --}}
-{{welcome-page}}
-{{!-- Feel free to remove this! --}}
-
-{{outlet}}
+{{#link-to 'application'}}Home{{/link-to}}
+{{#link-to 'books'}}Books{{/link-to}}
+{{#paper-toolbar class="site-content-toolbar"}}
+  <div class="md-toolbar-tools">
+    <div class="logo">
+      <i class="material-icons">book</i>&nbsp;&nbsp;
+    </div>
+    <strong>Book Store</strong>
+  </div>
+{{/paper-toolbar}}
+<div class="container">  
+ {{outlet}}
+</div>

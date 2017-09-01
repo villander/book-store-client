@@ -1,0 +1,42 @@
+@import 'ember-paper';
+
+
+.card-book {
+  margin: 10px;
+  border: 1px solid lightgray;
+  flex: 1;
+
+  md-card {
+    width: 100%;
+    padding: 10px;
+    align-items: center;
+    margin: 0;
+
+    img {
+      width: auto;
+      height: 100%;
+      max-height: 200px;
+      min-height: 200px;
+    }
+
+    md-card-title { 
+      width: 100%;
+      box-sizing: border-box;
+      display: block;
+      
+      md-card-title-text {
+
+        span {
+          text-align: center;
+          white-space: nowrap;
+          width: 100%;
+          display: block;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          font-size: 20px;
+        }
+      }
+    }
+  }
+}
+
