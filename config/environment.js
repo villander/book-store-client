@@ -7,6 +7,7 @@ module.exports = function(environment) {
     environment,
     rootURL: '/',
     locationType: 'auto',
+    API_HOST: 'https://morning-mountain-77224.herokuapp.com',
     EmberENV: {
       FEATURES: {
         // Here you can enable experimental features on an ember canary build
@@ -39,6 +40,7 @@ module.exports = function(environment) {
     // ENV.APP.LOG_TRANSITIONS = true;
     // ENV.APP.LOG_TRANSITIONS_INTERNAL = true;
     // ENV.APP.LOG_VIEW_LOOKUPS = true;
+    ENV.API_HOST = 'http://localhost:3000';
   }
 
   if (environment === 'test') {

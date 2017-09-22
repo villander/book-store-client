@@ -1,4 +1,5 @@
 import Ember from 'ember';
+import ENV from 'book-store-client/config/environment';
 
 const {
   Service,
@@ -25,8 +26,9 @@ export default Service.extend({
 
   init() {
     this._super(...arguments);
+    this.set('API_HOST', ENV.API_HOST);
     window.onmessage = (e) => {
-      if (e.origin === 'http://localhost:3000') {
+      if (e.origin === this.get('API_HOST')) {
         this.set('accessToken', e.data.google.accessToken);
       }
     };
@@ -41,7 +43,7 @@ export default Service.extend({
     const height = window.innerHeight;
     const left = ((width / 2) - (w / 2)) + dualScreenLeft;
     const top = ((height / 2) - (h / 2)) + dualScreenTop;
-    const url = "http://localhost:3000/auth/google";
+    const url = `${this.get('API_HOST')}/auth/google`;
     window.open(url, 'Authorize', `height=${h}, width=${w}, top=${top}, left=${left}`);
   },
 
