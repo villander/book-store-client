@@ -27,7 +27,7 @@ module.exports = function(environment) {
       'default-src': ["'none'"],
       'script-src': ["'self'",],
       'font-src': ["'self'", "https://fonts.gstatic.com"],
-      'connect-src': ["'self'", "http://localhost:3000"],
+      'connect-src': ["'self'", "http://localhost:3000", "https://morning-mountain-77224.herokuapp.com"],
       'img-src': ["'self'", "*", "data:"],
       'style-src': ["'self' 'unsafe-inline' https://fonts.googleapis.com"],
       'media-src': ["'self'"]
