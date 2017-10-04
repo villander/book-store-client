@@ -1,10 +1,9 @@
-{{link-to "Secret codez here" 'secret'}}
+{{!-- {{link-to "Secret codez here" 'secret'}} --}}
 
-<h2>Login page</h2>
-<p>Use login / ok</p>
+<div class="layout-column layout-align-center-center">
+  
+  <h3>Entre ou cadastre-se:</h3>
 
-<form {{action 'authenticate' on='submit'}}>
-  {{input value=login placeholder='Login'}}<br>
-  {{input value=password placeholder='Password' type='password'}}<br>
-  <button type="submit">Login</button>
-</form>
+  <img {{action 'authenticate'}} src="assets/btn_google_signin_dark_focus_web.png" style="cursor: pointer;" height="46" width="191">
+
+</div>

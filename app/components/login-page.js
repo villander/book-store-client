@@ -6,8 +6,7 @@ export default Ember.Component.extend({
 
   actions: {
     authenticate() {
-      const { login, password } = this.getProperties('login', 'password');
-      this.get('authManager').authenticate(login, password);
+      this.get('authManager').authenticate();
       // .then(() => {
       //   alert('Success! Click the top link!');
       // }, (err) => {

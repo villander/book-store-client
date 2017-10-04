@@ -1,11 +1,20 @@
-{{#link-to 'application'}}Home{{/link-to}}
-{{#link-to 'books'}}Books{{/link-to}}
 {{#paper-toolbar class="site-content-toolbar"}}
   <div class="md-toolbar-tools">
     <div class="logo">
       <i class="material-icons">book</i>&nbsp;&nbsp;
     </div>
-    <strong>Book Store</strong>
+    <strong>L&M Livraria</strong>
+    {{#link-to 'application'}}{{#paper-button}}Home{{/paper-button}}{{/link-to}}
+    {{#link-to 'books'}}{{#paper-button}}Livros{{/paper-button}}{{/link-to}}
+
+    <div class="paper-right">
+      {{paper-icon 'person'}}
+      {{#if session.currentUser}}
+        {{#paper-button }}Sair{{/paper-button}}
+      {{else}}
+        {{#link-to 'login'}}{{#paper-button }}Login{{/paper-button}}{{/link-to}}
+      {{/if}}
+    </div>
   </div>
 {{/paper-toolbar}}
 <div class="container">  
