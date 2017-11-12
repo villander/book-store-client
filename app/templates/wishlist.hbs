@@ -1,0 +1,11 @@
+<div class="wishlist-container">
+  {{#each model as |book|}}
+    <div class="book-image">
+      <img class="book-img" src="{{book.img}}">
+    </div>
+    <div class="book-info">
+      <h2>{{book.title}}</h2>
+      <span>{{book.author}}</span>
+    </div>
+  {{/each}}
+</div>

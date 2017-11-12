@@ -8,8 +8,11 @@ const Router = Ember.Router.extend({
 
 Router.map(function() {
   this.route('login');
-  this.route('books');
+  this.route('books', function() {
+    this.route('show', { path: '/:id'});
+  });
   this.route('secret');
+  this.route('wishlist');
 });
 
 export default Router;

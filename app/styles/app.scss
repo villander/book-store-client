@@ -1,9 +1,100 @@
 @import 'ember-paper';
 
+html {
+  font-size: 62.5%;
+  line-height: 1.4;
+}
+
+body {
+  font-size: 1.6rem;
+}
+
+
+h1, h2, h3, h4, h5, h6 {
+  margin-bottom: 1rem;
+  margin-top: 1rem;
+}
+
+h1 {
+  font-size: 3.400rem;
+  font-weight: 400;
+  line-height: 4rem;
+}
+
+h2 {
+  font-size: 2.400rem;
+  font-weight: 400;
+  line-height: 3.2rem;
+}
+
+h3 {
+  font-size: 2.000rem;
+  font-weight: 500;
+  letter-spacing: 0.005em;
+}
+
+h4 {
+  font-size: 1.600rem;
+  font-weight: 400;
+  letter-spacing: 0.010em;
+  line-height: 2.4rem;
+}
+
+p {
+  font-size: 1.6rem;
+  font-weight: 400;
+  letter-spacing: 0.010em;
+  line-height: 1.6em;
+  margin: 0.8em 0 1.6em;
+}
+
+strong {
+  font-weight: 500;
+}
+
+
+.container {
+  padding: 30px;
+}
+
 
 .paper-right {
   margin-left: auto;
 }
+
+.book-container {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  .book-description {
+    border-top: 1px solid gainsboro;
+    padding: 20px;
+  }
+  .book-details {
+    display: flex;
+    margin-bottom: 50px;
+
+    .book-image {
+      width: 400px;
+      max-height: 300px;
+      box-sizing: border-box;
+      flex-shrink: 0;
+      text-align: center;
+      .book-img {
+        display: inline-block;
+        width: 100%; 
+        max-width: 200px;  
+        max-height: 300px;
+      }
+    }
+
+    .book-info {
+      display: flex;
+      flex-direction: column;
+    }
+  }
+}
+
 
 
 .card-book {

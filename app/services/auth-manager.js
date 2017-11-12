@@ -4,22 +4,33 @@ import ENV from 'book-store-client/config/environment';
 const {
   Service,
   computed,
+  isEmpty,
   inject: { service }
 } = Ember;
 
-const COOKIE_NAME = 'session-token';
+const { keys } = Object;
+
+const COOKIE_NAME = 'lm-store-auth-session';
 
 export default Service.extend({
   cookies: service(),
+  router: service(),
+  ajax: service(),
 
-  isAuthenticated: computed.notEmpty('accessToken'),
+  isAuthenticated: computed.notEmpty('content'),
 
-  accessToken: computed({
+  content: computed({
     get() {
-      return this.get('cookies').read(COOKIE_NAME);
+      let data = this.get('cookies').read(COOKIE_NAME);
+      if (isEmpty(data)) {
+        return {};
+      } else {
+        return JSON.parse(data);
+      }
     },
     set(_, value) {
-      this.get('cookies').write(COOKIE_NAME, value);
+      let data = JSON.stringify(value || {});
+      this.get('cookies').write(COOKIE_NAME, data);
       return value;
     }
   }),
@@ -27,11 +38,18 @@ export default Service.extend({
   init() {
     this._super(...arguments);
     this.set('API_HOST', ENV.API_HOST);
-    window.onmessage = (e) => {
-      if (e.origin === this.get('API_HOST')) {
-        this.set('accessToken', e.data.google.accessToken);
-      }
-    };
+    if (keys(this.get('content')).length === 0) {
+      this.set('content', null);
+    }
+    window.addEventListener('message', this._receiveMessage.bind(this));
+  },
+
+  _receiveMessage(event) {
+    if (event.origin === this.get('API_HOST')) {
+      const { email, name, id, accessToken } = event.data.google;
+      this.set('content', { accessToken, user: { email, name, id } });
+      this.get('router').transitionTo('books', { queryParams: { page: 1 } });
+    }
   },
 
   authenticate() {
@@ -48,6 +66,12 @@ export default Service.extend({
   },
 
   invalidate() {
-    this.set('accessToken', null);
+    return this.get('ajax').request(
+      '/logout',
+      { method: 'GET' }
+    ).then(() => {
+      this.set('content', null);
+      this.get('router').transitionTo('login');
+    });
   },
 });

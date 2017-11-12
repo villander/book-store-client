@@ -1,0 +1,59 @@
+
+<div layout-fill layout="column">
+
+
+{{!-- {{#if showDialog}}
+  {{#paper-dialog class="flex-77" onClose=(action "closeDialog" "cancel") origin=dialogOrigin clickOutsideToClose=true}}
+    {{#paper-toolbar}}
+      {{#paper-toolbar-tools}}
+        <h2>{{bookOpened.volumeInfo.title}}</h2>
+        <span class="flex"></span>
+        {{#paper-button iconButton=true onClick=(action "closeDialog" "cancel")}}{{paper-icon icon="close"}}{{/paper-button}}
+      {{/paper-toolbar-tools}}
+    {{/paper-toolbar}}
+
+    {{#paper-dialog-content class="dialog-container"}}
+        <div class="book-image">
+          <img class="book-img" src="{{bookOpened.volumeInfo.imageLinks.smallThumbnail}}">
+        </div>
+        <div class="book-info">
+          <p>
+          {{bookOpened.volumeInfo.description}}
+        </p>
+        </div>
+        
+        
+    {{/paper-dialog-content}}
+  {{/paper-dialog}}
+{{/if}} --}}
+
+{{#each chunckBooks as |book|}}
+  <div class="flex layout-row layout-xs-column layout-sm-column">
+    {{#each book as |value|}}
+      <div class="flex layout-row card-book" >
+        {{#paper-card as |card|}}
+          {{card.image class='book-image' src=value.volumeInfo.imageLinks.smallThumbnail alt="Washed Out" title="Washed Out"}}
+          {{#card.title as |title|}}
+            {{#title.text as |text|}}
+              {{#text.headline}}{{value.volumeInfo.title}}{{/text.headline}}
+            {{/title.text}}
+          {{/card.title}}
+          {{#card.actions}}
+            {{#paper-button raised=true onClick=(action 'openBook' value)}}Ver mais{{/paper-button}}
+            {{#paper-button primary=true raised=true}}Comprar{{/paper-button}}
+          {{/card.actions}}
+          {{!--<div class=''>
+            <p>{{value.volumeInfo.title}}</p>
+            {{#paper-button}}Comprar{{/paper-button}}
+          </div>--}}
+          
+        {{/paper-card}}
+      </div>
+    {{/each}}
+  </div>
+{{/each}}
+
+<button {{action "prevPage"}}>prev page</button>
+<button {{action "nextPage"}}>next page</button>
+
+</div>

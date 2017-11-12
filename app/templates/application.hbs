@@ -1,3 +1,4 @@
+
 {{#paper-toolbar class="site-content-toolbar"}}
   <div class="md-toolbar-tools">
     <div class="logo">
@@ -6,11 +7,12 @@
     <strong>L&M Livraria</strong>
     {{#link-to 'application'}}{{#paper-button}}Home{{/paper-button}}{{/link-to}}
     {{#link-to 'books'}}{{#paper-button}}Livros{{/paper-button}}{{/link-to}}
+    {{#link-to 'wishlist'}}{{#paper-button}}Wish List{{/paper-button}}{{/link-to}}
 
     <div class="paper-right">
       {{paper-icon 'person'}}
-      {{#if session.currentUser}}
-        {{#paper-button }}Sair{{/paper-button}}
+      {{#if authManager.isAuthenticated}}
+        {{#paper-button onClick=(action 'logout') }}Sair{{/paper-button}}
       {{else}}
         {{#link-to 'login'}}{{#paper-button }}Login{{/paper-button}}{{/link-to}}
       {{/if}}

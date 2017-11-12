@@ -9,9 +9,10 @@ export default DS.RESTAdapter.extend({
   host: ENV.API_HOST,
   authManager: service(),
 
-  headers: computed('authManager.accessToken', function() {
+  headers: computed('authManager.content', function() {
     return {
-      "Authorization": `Bearer ${this.get("authManager.accessToken")}`
+      'Authorization': `Bearer ${this.get('authManager.content.accessToken')}`,
+      'X-Key': this.get('authManager.content.user.id')
     };
   })
 });
