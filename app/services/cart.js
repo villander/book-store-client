@@ -3,11 +3,12 @@ import Ember from 'ember';
 export default Ember.Service.extend({
   store: Ember.inject.service(),
 
+  bookIds: [],
+
   init() {
     this._super(...arguments);
 
     let payload;
-    let content = Ember.A();
 
     if (window.localStorage.getItem('cart')) {
       payload = window.localStorage.getItem('cart');
@@ -16,11 +17,9 @@ export default Ember.Service.extend({
 
     if (payload) {
       payload.forEach((item) => {
-        content.pushObject(item);
+        this.get('bookIds').pushObject(item);
       });
     }
-
-    this.set('bookIds', content);
 
     this.addObserver('bookIds.[]', this, this._dumpToLocalStorage.bind(this));
   },
