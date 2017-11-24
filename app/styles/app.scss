@@ -240,6 +240,7 @@ strong {
   margin: 10px;
   border: 1px solid lightgray;
   flex: 1;
+  max-width: calc(20% - 20px);
 
   md-card {
     width: 100%;

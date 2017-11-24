@@ -19,6 +19,14 @@ export default Controller.extend({
     return result;
   }),
   metaData: computed.alias('model.meta'),
+
+  showButtonPages: computed('metaData', function() {
+    return this.get('metaData.total_pages') > 1;
+  }),
+
+  hasPrevPage: computed.gt('page', 1),
+
+
   actions: {
     nextPage() {
       if (this.get('page') < this.get('metaData.total_pages')) {

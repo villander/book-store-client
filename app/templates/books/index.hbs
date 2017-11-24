@@ -55,8 +55,18 @@
     {{/each}}
   </div>
 {{/each}}
+{{#if showButtonPages}}
+  {{#if hasPrevPage}}
+    {{#paper-button  primary=true noink=true  onClick=(action 'prevPage')}}
+      {{paper-icon 'keyboard-arrow-left'}}
+      Anterior
+    {{/paper-button}}
+  {{/if}}
+  {{#paper-button  primary=true noink=true onClick=(action 'nextPage')}}
+  Próxima
+  {{paper-icon 'keyboard-arrow-right'}}
+  {{/paper-button}}
+{{/if}}
 
-<button {{action "prevPage"}}>prev page</button>
-<button {{action "nextPage"}}>next page</button>
 
 </div>
