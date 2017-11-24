@@ -36,11 +36,14 @@
           {{#card.title as |title|}}
             {{#title.text as |text|}}
               {{#text.headline}}{{value.volumeInfo.title}}{{/text.headline}}
+              {{#text.headline}}
+                {{format-money value.price symbol="R$ " decimal="," thousand="."}}
+              {{/text.headline}}
             {{/title.text}}
           {{/card.title}}
           {{#card.actions}}
             {{#paper-button raised=true onClick=(action 'openBook' value)}}Ver mais{{/paper-button}}
-            {{#paper-button primary=true raised=true}}Comprar{{/paper-button}}
+            {{#paper-button primary=true  raised=true raised=true onClick=(action 'buyItem' value)}}{{paper-icon "add-shopping-cart"}}{{/paper-button}}
           {{/card.actions}}
           {{!--<div class=''>
             <p>{{value.volumeInfo.title}}</p>

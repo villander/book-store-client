@@ -6,9 +6,10 @@ const {
 } = Ember;
 
 export default Controller.extend({
+  cart: Ember.inject.service(),
   queryParams: ['page'],
   page: 1,
-  chunckBooks: computed('model.[]', function () {
+  chunckBooks: computed('model.[]', function() {
     console.log(this.get('model.meta'), 'meta');
     let result = [], chunkSize = 5;
     const model = this.get('model').toArray();
@@ -35,6 +36,9 @@ export default Controller.extend({
     },
     openBook(book) {
       this.transitionToRoute('books.show', book.id);
+    },
+    buyItem(book) {
+      this.get('cart').add(book.id);
     }
   }
 });

@@ -1,0 +1,37 @@
+<h2>Carrinho</h2>
+<div class="cart">
+  <div class="cart-item">
+    <div class="book-image book-block">
+       
+    </div>
+    <div class="book-description">
+      <h3>Descrição</h3>
+    </div>
+    <div class="book-price book-block">
+      <h3>Preço</h3>
+    </div>
+    <div class="book-action book-block">
+      
+    </div>
+  </div>
+  {{#each cart.books as |book|}}
+  <div class="cart-item">
+    <div class="book-image book-block">
+        <img class="book-img" src="{{book.volumeInfo.imageLinks.smallThumbnail}}">
+    </div>
+    <div class="book-description">
+      <strong>{{book.volumeInfo.title}}</strong>
+    </div>
+    <div class="book-price book-block">
+      <span>{{format-money book.price symbol="R$ " decimal="," thousand="."}}</span>
+    </div>
+    <div class="book-action book-block">
+      {{#paper-button class="btn-book-action" warn=true noink=true onClick=(action 'removeItem' book.id) }}Remover{{/paper-button}}
+    </div>
+  </div>
+  {{/each}}
+  <div class="totals">Total: {{format-money cart.total symbol="R$ " decimal="," thousand="."}}</div>
+  {{#if cart.bookIds.length}}
+    {{#paper-button class="btn-checkout" primary=true raised=true onClick=(action 'goToPurchase' cart.books)}}Comprar{{/paper-button}}
+  {{/if}}
+</div>

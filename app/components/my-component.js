@@ -2,7 +2,8 @@ import Ember from 'ember';
 
 export default Ember.Component.extend({
   bookWished: Ember.computed('model.bookWished.[]', function() {
-    return this.get('model.bookWished.firstObject');
+    const bookWished = this.get('model.bookWished').filterBy('bookId', this.get('model.book.id'));
+    return bookWished;
   }),
   actions: {
     addInWishList(book) {

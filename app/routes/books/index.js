@@ -10,14 +10,8 @@ export default Ember.Route.extend({
     const { page } = params;
     return this.store.query('book', { page });
   },
-  actions: {
-    loading(transition, originRoute) {
-      // let controller = this.controllerFor('foo');
-      // controller.set('currentlyLoading', true);
-      // transition.promise.finally(function() {
-      //     controller.set('currentlyLoading', false);
-      // });
-      console.log('loading...');
-    }
+  afterModel() {
+    this._super(...arguments);
+    window.scrollTo(0, 0);
   }
 });

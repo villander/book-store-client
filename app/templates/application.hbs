@@ -1,15 +1,19 @@
-
+{{#paper-content flex-layout="column" flex=true}}
 {{#paper-toolbar class="site-content-toolbar"}}
   <div class="md-toolbar-tools">
     <div class="logo">
       <i class="material-icons">book</i>&nbsp;&nbsp;
     </div>
     <strong>L&M Livraria</strong>
-    {{#link-to 'application'}}{{#paper-button}}Home{{/paper-button}}{{/link-to}}
-    {{#link-to 'books'}}{{#paper-button}}Livros{{/paper-button}}{{/link-to}}
+    {{!-- {{#link-to 'application'}}{{#paper-button}}Home{{/paper-button}}{{/link-to}} --}}
+    {{#link-to 'books'}}{{#paper-button}}Início{{/paper-button}}{{/link-to}}
     {{#link-to 'wishlist'}}{{#paper-button}}Wish List{{/paper-button}}{{/link-to}}
 
     <div class="paper-right">
+      {{#link-to 'checkout.cart' class="btn-shopping-cart" data-badge=cart.bookIds.length }}{{#paper-button}}{{paper-icon "add-shopping-cart"}}
+      {{/paper-button}}
+      {{!-- <span class="badge">{{cart.books.length}}</span> --}}
+      {{/link-to}}
       {{paper-icon 'person'}}
       {{#if authManager.isAuthenticated}}
         {{#paper-button onClick=(action 'logout') }}Sair{{/paper-button}}
@@ -22,3 +26,4 @@
 <div class="container">  
  {{outlet}}
 </div>
+{{/paper-content}}

@@ -3,6 +3,7 @@
     <div class="book-image">
       <img class="book-img" src="{{model.book.volumeInfo.imageLinks.smallThumbnail}}">
     </div>
+    {{log bookWished}}
     {{!-- test relationship  --}}
     {{!-- {{log model.bookWished.firstObject.book}} --}}
     <div class="book-info">
@@ -11,7 +12,7 @@
       {{#unless bookWished}}
         <button {{action 'addInWishList' model.book}}>Adicionar a lista de desejos</button>
       {{else}}
-        <button {{action 'removeWishListItem' bookWished}}>Remover da lista de desejos</button>
+        <button {{action 'removeWishListItem' bookWished.firstObject}}>Remover da lista de desejos</button>
       {{/unless}}
     </div>
 

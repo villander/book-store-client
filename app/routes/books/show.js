@@ -4,11 +4,7 @@ import RSVP from 'rsvp';
 export default Ember.Route.extend({
   model(params) {
     return RSVP.hash({
-      bookWished: this.store.findAll('wishlist')
-        .then((wishlist) => {
-          const bookWished = wishlist.filterBy('bookId', params.id);
-          return bookWished;
-        }),
+      wishedBooks: this.store.findAll('wishlist'),
       book: this.store.findRecord('book', params.id)
     });
   },
@@ -26,15 +22,12 @@ export default Ember.Route.extend({
         author: book.get('volumeInfo.authors.firstObject')
       });
 
-      return wishlist.save().then((record) => {
-        this.controller.get('model.bookWished').pushObject(record);
-      });
+      return wishlist.save();
     },
-    removeWishListItem(bookWished) {
-      return bookWished.destroyRecord().then(() => { 
+    removeWishListItem(wishedBook) {
+      return wishedBook.destroyRecord().then(() => {
         // hack issue: https://github.com/emberjs/data/issues/4972
-        this.store._removeFromIdMap(bookWished._internalModel);
-        this.controller.get('model.bookWished').removeObject(bookWished); 
+        this.store._removeFromIdMap(wishedBook._internalModel);
       });
     }
   }

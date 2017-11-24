@@ -1,11 +1,20 @@
+<h2>Minha lista de desejos</h2>
 <div class="wishlist-container">
   {{#each model as |book|}}
-    <div class="book-image">
-      <img class="book-img" src="{{book.img}}">
-    </div>
-    <div class="book-info">
-      <h2>{{book.title}}</h2>
-      <span>{{book.author}}</span>
+    <div class="wishlist-item">
+      <div class="book-image book-block">
+        <img class="book-img" src="{{book.img}}">
+      </div>
+      <div class="book-description">
+        <strong>{{book.title}}</strong>
+        <span>{{book.author}}</span>
+      </div>
+      <div class="book-price book-block">
+        <span>{{format-money book.price.content symbol="R$ " decimal="," thousand="."}}</span>
+      </div>
+      <div class="book-action book-block">
+        {{#paper-button class="btn-book-action" primary=true noink=true onClick=(action 'removeWishListItem' book) }}Remover{{/paper-button}}
+      </div>
     </div>
   {{/each}}
 </div>

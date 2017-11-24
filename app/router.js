@@ -13,6 +13,10 @@ Router.map(function() {
   });
   this.route('secret');
   this.route('wishlist');
+  this.route('checkout', function() {
+    this.route('cart');
+    this.route('payment');
+  });
 });
 
 export default Router;

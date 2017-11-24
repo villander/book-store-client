@@ -1,3 +1,6 @@
+$primary: 'teal';
+$warn: 'red';
+
 @import 'ember-paper';
 
 html {
@@ -7,6 +10,8 @@ html {
 
 body {
   font-size: 1.6rem;
+  margin: 0;
+  padding: 0;
 }
 
 
@@ -52,14 +57,130 @@ strong {
   font-weight: 500;
 }
 
+.site-content-toolbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 2;
+}
 
 .container {
+  margin-top: 70px;
   padding: 30px;
 }
 
+.wishlist-container {
+  display: flex;
+  flex-direction: column;
+  .wishlist-item {
+    display: flex;
+    padding: 10px;
+    max-height: 200px;
+    min-height: 200px;
+    .book-block {
+      width: 15%;
+    }
+    .book-description {
+      flex: 1;
+      max-width: 300px;
+      padding-right: 20px;
+    }
+    .book-image {
+      img {
+        margin: 0 auto;
+        display: block;
+        height: 100%;
+      }
+    }
+    .btn-book-action {
+      border: 1px solid;
+    }
+  }
+}
+
+.cart {
+  margin-top: -60px;
+  .btn-checkout {
+    float: right;
+    border: 0;
+    margin: 10px 0 80px 0;
+    padding: 6px 25px;
+    background-color: #6b6 !important;
+    color: #fff;
+    font-size: 18px;
+    border-radius: 3px;
+  }
+  .totals {
+    float: right;
+    clear: both;
+    width: 100%;
+    margin-bottom: 10px;
+    text-align: right;
+    margin-top: 20px;
+    padding: 6px 25px;
+  }
+}
+
+.cart-item {
+  border-bottom: 1px solid gainsboro;
+  display: flex;
+  padding: 10px;
+  max-height: 130px;
+  min-height: 130px;
+  &:first-child {
+    min-height: 0;
+  }
+  h3 {
+    color: #aaa;
+    font-weight: 400;
+  }
+  .book-description {
+    flex: 1;
+  }
+  .book-image {
+    img {
+      margin: 0 auto;
+      display: block;
+      height: 100%;
+    }
+  }
+  .book-block {
+    width: 15%;
+  }
+  .btn-book-action {
+    border: 1px solid;
+  }
+  .md-button.md-default-theme:not([disabled]):hover, .md-button:not([disabled]):hover,
+  .btn-book-action:hover {
+    background-color: #f78787;
+    color: white;
+  }
+
+  
+}
 
 .paper-right {
   margin-left: auto;
+  .btn-shopping-cart {
+    position: relative;
+    margin-right: 50px;
+    &::before {
+      font-size: 14px;
+      font-weight: 500;
+      color: teal;
+      content: attr(data-badge);
+      position: absolute;
+      top: -10px;
+      right: 30px;
+      background-color: #ffffff;
+      width: 20px;
+      height: 20px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
 }
 
 .book-container {
@@ -91,10 +212,28 @@ strong {
     .book-info {
       display: flex;
       flex-direction: column;
+      .toggle-wish-book {
+        margin-top: auto;
+        margin-left: 0;
+        border: 1px solid;
+      }
     }
   }
 }
 
+.loading-container, .checkout-success-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 85vh;
+}
+
+.checkout-success-container {
+  flex-direction: column;
+  .checkout-success-order {
+    display: flex;
+  }
+}
 
 
 .card-book {

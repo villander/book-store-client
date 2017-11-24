@@ -1,7 +1,10 @@
 import Ember from 'ember';
 
 export default Ember.Controller.extend({
-  // bookWished: Ember.computed.readOnly('model.bookWished.firstObject'),
+  wishedBook: Ember.computed('model.wishedBooks.[]', function() {
+    const wishedBook = this.get('model.wishedBooks').filterBy('bookId', this.get('model.book.id'));
+    return wishedBook.get('firstObject');
+  }),
   actions: {
     addInWishList(book) {
       const wishlist = this.store.createRecord('wishlist', {
@@ -18,7 +21,6 @@ export default Ember.Controller.extend({
       return bookWished.destroyRecord().then(() => {
         // hack issue: https://github.com/emberjs/data/issues/4972
         this.store._removeFromIdMap(bookWished._internalModel);
-        // this.controller.get('model.bookWished').removeObject(bookWished); 
       });
     }
   }

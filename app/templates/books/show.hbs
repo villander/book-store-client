@@ -1,5 +1,25 @@
-{{my-component 
-  model=model
-  removeWishListItem=(action 'removeWishListItem')
-  addInWishList=(action 'addInWishList')
-  }}
+<div class="book-container">
+  <div class="book-details">
+    <div class="book-image">
+      <img class="book-img" src="{{model.book.volumeInfo.imageLinks.smallThumbnail}}">
+    </div>
+    {{!-- test relationship  --}}
+    {{!-- {{log model.bookWished.firstObject.book}} --}}
+    <div class="book-info">
+      <h2>{{model.book.volumeInfo.title}}</h2>
+      <span>{{model.book.volumeInfo.authors.firstObject}}</span>
+      {{#unless wishedBook}}
+        {{#paper-button  primary=true noink=true class="toggle-wish-book" onClick=(action 'addInWishList' model.book)}}Adicionar a lista de desejos{{/paper-button}}
+      {{else}}
+        {{#paper-button  primary=true noink=true class="toggle-wish-book" onClick=(action 'removeWishListItem' wishedBook)}}Remover da lista de desejos{{/paper-button}}
+      {{/unless}}
+    </div>
+
+    {{!-- <button{{action 'mano' model.bookWished}}>Adicionar a lista de desejos</button> --}}
+  </div>
+
+  <div class="book-description">
+    <strong><h4>Descrição: </h4></strong><span>{{model.book.volumeInfo.description}}</span>
+  </div>
+
+</div>
