@@ -3,10 +3,10 @@ import Ember from 'ember';
 export default Ember.Service.extend({
   store: Ember.inject.service(),
 
-  bookIds: [],
-
   init() {
     this._super(...arguments);
+
+    this.set('bookIds', Ember.A());
 
     let payload;
 
@@ -17,7 +17,7 @@ export default Ember.Service.extend({
 
     if (payload) {
       payload.forEach((item) => {
-        this.get('bookIds').pushObject(item);
+        this.get('bookIds').pushObject(this.get('store').createRecord('book', item));
       });
     }
 
@@ -33,26 +33,13 @@ export default Ember.Service.extend({
   _dumpToLocalStorage() {
     let bookIds = this.get('bookIds');
     if (!Ember.isEmpty(bookIds)) {
-      window.localStorage.setItem('cart', JSON.stringify(this.get('bookIds')));
+      window.localStorage.setItem('cart', JSON.stringify(bookIds));
     } else {
       window.localStorage.removeItem('cart');
     }
   },
 
-  // booksObserver: Ember.observer('bookIds.[]', function() {
-  //   let bookIds = this.get('bookIds');
-
-  //   if (Ember.isEmpty(bookIds)) {
-  //     this.set('books', bookIds);
-  //   } else {
-  //     this.get('store').query('book', { ids: bookIds }).then((books) => {
-  //       this.set('books', books.content);
-  //     })
-  //   }
-  // }),
-
-  bookPrices: Ember.computed.mapBy('books', 'price'),
-
+  bookPrices: Ember.computed.mapBy('bookIds', 'price'),
   total: Ember.computed.sum('bookPrices'),
 
   add(bookId) {
@@ -60,6 +47,7 @@ export default Ember.Service.extend({
   },
 
   remove(bookId) {
+    // https://stackoverflow.com/questions/38620994/ember-js-remove-only-one-instance-of-object-with-removeobject
     this.get('bookIds').removeObject(bookId);
   },
 
