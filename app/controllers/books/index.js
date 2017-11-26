@@ -46,7 +46,7 @@ export default Controller.extend({
       this.transitionToRoute('books.show', book.id);
     },
     buyItem(book) {
-      this.get('cart').add(book.id);
+      this.get('cart').add(book);
     }
   }
 });

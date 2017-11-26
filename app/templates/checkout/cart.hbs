@@ -14,7 +14,7 @@
       
     </div>
   </div>
-  {{#each cart.books as |book|}}
+  {{#each cart.bookIds as |book|}}
   <div class="cart-item">
     <div class="book-image book-block">
         <img class="book-img" src="{{book.volumeInfo.imageLinks.smallThumbnail}}">
@@ -26,11 +26,16 @@
       <span>{{format-money book.price symbol="R$ " decimal="," thousand="."}}</span>
     </div>
     <div class="book-action book-block">
-      {{#paper-button class="btn-book-action" warn=true noink=true onClick=(action 'removeItem' book.id) }}Remover{{/paper-button}}
+      {{#paper-button class="btn-book-action" warn=true noink=true onClick=(action 'removeItem' book) }}Remover{{/paper-button}}
     </div>
   </div>
   {{/each}}
   <div class="totals">Total: {{format-money cart.total symbol="R$ " decimal="," thousand="."}}</div>
+  {{!-- {{#each cart.bookIds as |book|}}
+    {{book}}
+    {{#paper-button class="btn-book-action" warn=true noink=true onClick=(action 'removeItem' book) }}Remover{{/paper-button}}
+  {{/each}}
+  {{cart.bookIds.length}} --}}
   {{#if cart.bookIds.length}}
     {{#paper-button class="btn-checkout" primary=true raised=true onClick=(action 'goToPurchase' cart.books)}}Comprar{{/paper-button}}
   {{/if}}

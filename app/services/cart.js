@@ -39,10 +39,17 @@ export default Ember.Service.extend({
     }
   },
 
-  books: Ember.computed('bookIds.[]', function() {
-    let bookIds = this.get('bookIds');
-    return Ember.isEmpty(bookIds) ? bookIds : this.get('store').query('book', { ids: bookIds });
-  }),
+  // booksObserver: Ember.observer('bookIds.[]', function() {
+  //   let bookIds = this.get('bookIds');
+
+  //   if (Ember.isEmpty(bookIds)) {
+  //     this.set('books', bookIds);
+  //   } else {
+  //     this.get('store').query('book', { ids: bookIds }).then((books) => {
+  //       this.set('books', books.content);
+  //     })
+  //   }
+  // }),
 
   bookPrices: Ember.computed.mapBy('books', 'price'),
 
