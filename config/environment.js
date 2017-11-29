@@ -23,11 +23,14 @@ module.exports = function(environment) {
       // Here you can pass flags/options to your application instance
       // when it is created
     },
+    'ember-websockets': {
+      socketIO: true
+    },
     contentSecurityPolicy: {
       'default-src': ["'none'"],
       'script-src': ["'self'",],
       'font-src': ["'self'", "https://fonts.gstatic.com"],
-      'connect-src': ["'self'", "http://localhost:3000", "https://morning-mountain-77224.herokuapp.com"],
+      'connect-src': ["'self'", "http://localhost:3000", "ws://localhost:3000", "https://morning-mountain-77224.herokuapp.com"],
       'img-src': ["'self'", "*", "data:"],
       'style-src': ["'self' 'unsafe-inline' https://fonts.googleapis.com"],
       'media-src': ["'self'"]

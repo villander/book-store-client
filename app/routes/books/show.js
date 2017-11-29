@@ -1,17 +1,42 @@
 import Ember from 'ember';
 import RSVP from 'rsvp';
+import ENV from 'book-store-client/config/environment';
+
+const { Logger, inject: { service } } = Ember;
 
 export default Ember.Route.extend({
+  authManager: service(),
+  socketIOService: service('socket-io'),
+
+  init() {
+    this._super(...arguments);
+
+    const socket = this.get('socketIOService').socketFor(ENV.API_HOST);
+    socket.on('connect', this._connectHandler, this);
+
+    this.socket = socket;
+  },
+
   model(params) {
     return RSVP.hash({
       wishedBooks: this.store.findAll('wishlist'),
       book: this.store.findRecord('book', params.id)
     });
   },
+
+  afterModel(model) {
+    this.socket.emit('bookViewed', { bookId: model.book.id, userId: this.get('authManager.content.user.id') });
+  },
+
   activate() {
     this._super(...arguments);
     window.scrollTo(0, 0);
   },
+
+  _connectHandler(event) {
+    Logger.info(`On open event has been called: ${event}`);
+  },
+
   actions: {
     addInWishList(book) {
       const wishlist = this.store.createRecord('wishlist', {
