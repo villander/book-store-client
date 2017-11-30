@@ -24,8 +24,11 @@ export default Ember.Route.extend({
     });
   },
 
-  afterModel(model) {
-    this.socket.emit('bookViewed', { bookId: model.book.id, userId: this.get('authManager.content.user.id') });
+  afterModel(model, transition) {
+    transition.then(() => {
+      // Done transitioning
+      this.socket.emit('bookViewed', { bookId: model.book.id, userId: this.get('authManager.content.user.id') });
+    });
   },
 
   activate() {
