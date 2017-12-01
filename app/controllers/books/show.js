@@ -5,6 +5,9 @@ export default Ember.Controller.extend({
     const wishedBook = this.get('model.wishedBooks').filterBy('bookId', this.get('model.book.id'));
     return wishedBook.get('firstObject');
   }),
+  description: Ember.computed('model.book.volumeInfo.description', function() {
+    return Ember.String.htmlSafe(this.get('model.book.volumeInfo.description'));
+  }),
   actions: {
     addInWishList(book) {
       const wishlist = this.store.createRecord('wishlist', {
